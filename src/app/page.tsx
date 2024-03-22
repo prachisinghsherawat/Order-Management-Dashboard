@@ -1,9 +1,16 @@
+"use client"
+
 import Navbar from "@/components/Navbar";
 import EnhancedTable from "@/components/home/Table";
 import { DocumentTextIcon, MagnifyingGlassIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import FilterModal from '@/components/FilterModal';
 
 
 export default function Home() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <div className="flex flex-1 py-8 justify-between items-center">
@@ -38,8 +45,23 @@ export default function Home() {
             aria-hidden="true"
           />
         </div>
+      </div>
 
-        <EnhancedTable />
+      <div className="flex space-x-8 justify-between">
+        <div className="w-2/3">
+          <EnhancedTable />
+        </div>
+
+        <div className="rounded-lg w-1/3 bg-white">
+          <button
+            className="bg-gray-900"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Open
+          </button>
+
+          <FilterModal open={isModalOpen} setOpen={setIsModalOpen} />
+        </div>
       </div>
     </>
   );
