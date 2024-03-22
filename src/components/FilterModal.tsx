@@ -2,11 +2,18 @@
 
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Square2StackIcon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Squares2X2Icon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface Status{
+  id: number
+  name:string
+  icon: any
+  color:string
 }
 
 const statuses = [
@@ -15,7 +22,7 @@ const statuses = [
   { id: 3, name: "Sent", icon: ArrowTrendingUpIcon, color: "" },
   { id: 4, name: "Failure", icon: NoSymbolIcon, color: "" },
   { id: 5, name: "Refund Initiated", icon: SquaresPlusIcon, color: "" },
-  { id: 6, name: "Refund Completed", icon: Square2StackIcon, color: "" }
+  { id: 6, name: "Refund Completed", icon: Squares2X2Icon, color: "" }
 ];
 
 export default function FilterModal({ open, setOpen }: Props) {
@@ -52,7 +59,6 @@ export default function FilterModal({ open, setOpen }: Props) {
           >
             <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
               <div className="px-4 py-5 sm:p-6">
-
                 {/* title here */}
                 <div className="flex items-center justify-between">
                   <Dialog.Title
@@ -73,7 +79,7 @@ export default function FilterModal({ open, setOpen }: Props) {
                   </button>
                 </div>
 
-                {/* input here */}
+                {/* Input */}
                 <div className="mt-6">
                   <div className="border-2 border-gray-300 rounded-lg">
                     <input
@@ -86,11 +92,27 @@ export default function FilterModal({ open, setOpen }: Props) {
                   </div>
                 </div>
 
-                {/* machines here */}
+                {/* Machines */}
 
-                {/* status here */}
+                {/* Status */}
 
-                
+                <div className="mt-6">
+                  <h1 className="text-gray-900 text-sm">Status</h1>
+                  <div className="grid grid-cols-5 mt-3 gap-4">
+                    {statuses.map((status: Status) => (
+                      <div className="rounded-md py-2 items-center flex flex-col border border-gray-400 hover:border-gray-800">
+                        <status.icon
+                          className="w-7 h-7 text-gray-700"
+                          aria-hidden="true"
+                        />
+                        <p className="text-gray-900 mt-2 text-xs text-center">{status.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Date Range */}
+
 
               </div>
             </div>
