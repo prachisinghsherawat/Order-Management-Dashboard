@@ -34,9 +34,9 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="flex flex-col w-20 bg-white px-2 py-4">
+      <div className="flex flex-col w-20 bg-white shadow px-2 py-4">
         <img
           className="h-8 w-auto mx-auto"
           src={basilLogo}
