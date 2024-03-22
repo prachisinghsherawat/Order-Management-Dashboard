@@ -8,7 +8,8 @@ import {
   HomeIcon,
   UsersIcon,
   Cog8ToothIcon,
-  ArrowRightStartOnRectangleIcon
+  ArrowRightStartOnRectangleIcon,
+  MapIcon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import basilLogo from "../assets/images/basil_logo.png";
@@ -18,34 +19,35 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { href: "#", icon: HomeIcon, current: false },
-  { href: "#", icon: HomeModernIcon, current: true },
-  { href: "#", icon: UsersIcon, current: false },
-  { href: "#", icon: CalendarIcon, current: false },
-  { href: "#", icon: DocumentDuplicateIcon, current: false },
-  { href: "#", icon: ChartPieIcon, current: false },
-  { href: "#", icon: Cog8ToothIcon, current: false },
-  { href: "#", icon: ArrowRightStartOnRectangleIcon, current: false }
+  { id: 0, href: "#", icon: HomeIcon, current: false },
+  { id: 1, href: "#", icon: MapIcon, current: false },
+  { id: 2, href: "#", icon: HomeModernIcon, current: true },
+  { id: 3, href: "#", icon: UsersIcon, current: false },
+  { id: 4, href: "#", icon: CalendarIcon, current: false },
+  { id: 5, href: "#", icon: DocumentDuplicateIcon, current: false },
+  { id: 6, href: "#", icon: ChartPieIcon, current: false },
+  { id: 7, href: "#", icon: Cog8ToothIcon, current: false },
+  { id: 8, href: "#", icon: ArrowRightStartOnRectangleIcon, current: false }
 ];
 
-function classNames(...classes) {
+function classNames(...classes:any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({children} : any) {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="flex flex-col w-20 bg-white shadow px-2 py-4">
         <img
           className="h-8 w-auto mx-auto"
-          src={basilLogo}
+          src=""
           alt="Your Company"
         />
         <nav className="mt-8">
           <ul role="list" className="flex flex-col gap-4">
             {navigation.map((item) => (
-              <li key={item.name}>
+              <li key={item.id}>
                 <Link
                   href={item.href}
                   className={classNames(
@@ -264,6 +266,8 @@ export default function Navbar() {
             </>
           )}
         </Disclosure>
+
+        {children}
       </div>
     </div>
   );
