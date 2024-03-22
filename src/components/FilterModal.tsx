@@ -2,7 +2,7 @@
 
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Square2StackIcon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   open: boolean;
@@ -10,12 +10,12 @@ interface Props {
 }
 
 const statuses = [
-  { id: 1, name: "Successful", icon: "", color: "" },
-  { id: 2, name: "Pending", icon: "", color: "" },
-  { id: 3, name: "Sent", icon: "", color: "" },
-  { id: 4, name: "Failure", icon: "", color: "" },
-  { id: 5, name: "Refund Initiated", icon: "", color: "" },
-  { id: 6, name: "Refund Completed", icon: "", color: "" }
+  { id: 1, name: "Successful", icon: CheckCircleIcon, color: "" },
+  { id: 2, name: "Pending", icon: ArrowPathIcon, color: "" },
+  { id: 3, name: "Sent", icon: ArrowTrendingUpIcon, color: "" },
+  { id: 4, name: "Failure", icon: NoSymbolIcon, color: "" },
+  { id: 5, name: "Refund Initiated", icon: SquaresPlusIcon, color: "" },
+  { id: 6, name: "Refund Completed", icon: Square2StackIcon, color: "" }
 ];
 
 export default function FilterModal({ open, setOpen }: Props) {
