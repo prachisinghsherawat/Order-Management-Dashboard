@@ -3,6 +3,8 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Squares2X2Icon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import Button from "./Button";
 
 interface Props {
   open: boolean;
@@ -105,7 +107,9 @@ export default function FilterModal({ open, setOpen }: Props) {
                           className="w-7 h-7 text-gray-700"
                           aria-hidden="true"
                         />
-                        <p className="text-gray-900 mt-2 text-xs text-center">{status.name}</p>
+                        <p className="text-gray-900 mt-2 text-xs text-center">
+                          {status.name}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -113,7 +117,12 @@ export default function FilterModal({ open, setOpen }: Props) {
 
                 {/* Date Range */}
 
+                {/* Buttons */}
 
+                <div className="flex justify-between items-center mt-6">
+                  <Link className='underline text-sm text-gray-900' href=''>Clear All</Link>
+                  <Button>Apply</Button>
+                </div>
               </div>
             </div>
           </Transition.Child>
