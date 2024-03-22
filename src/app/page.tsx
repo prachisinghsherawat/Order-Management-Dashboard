@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import EnhancedTable from "@/components/home/Table";
 import { DocumentTextIcon, MagnifyingGlassIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
 
 
@@ -37,6 +38,8 @@ export default function Home() {
             aria-hidden="true"
           />
         </div>
+
+        <EnhancedTable />
       </div>
     </>
   );
