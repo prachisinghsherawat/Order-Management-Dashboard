@@ -17,6 +17,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import TextInput from "./TextInput";
 
 const navigation = [
   { id: 0, href: "#", icon: HomeIcon, current: false },
@@ -38,7 +39,7 @@ export default function Navbar({children} : any) {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="flex flex-col w-20 bg-white shadow px-2 py-4">
+      <div className="flex flex-col w-20 bg-white shadow-sm px-2 py-4">
         <img
           className="h-8 w-auto mx-auto"
           src=""
@@ -68,7 +69,7 @@ export default function Navbar({children} : any) {
       {/* Navigation Bar */}
 
       <div className="mx-8 flex-1">
-        <Disclosure as="nav" className="bg-white shadow rounded-b-lg">
+        <Disclosure as="nav" className="bg-white shadow-sm rounded-b-lg">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-9xl px-2 sm:px-4">
@@ -84,26 +85,7 @@ export default function Navbar({children} : any) {
                     </div>
                   </div>
                   <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                    <div className="w-full max-w-lg lg:max-w-xs">
-                      <label htmlFor="search" className="sr-only">
-                        Search
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <MagnifyingGlassIcon
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <input
-                          id="search"
-                          name="search"
-                          className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-xs sm:leading-6"
-                          placeholder="Search"
-                          type="search"
-                        />
-                      </div>
-                    </div>
+                    <TextInput id="search" name="search" />
                   </div>
                   <div className="flex items-center lg:hidden">
                     {/* Mobile menu button */}
