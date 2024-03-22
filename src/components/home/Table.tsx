@@ -1,17 +1,30 @@
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-  }
+// 'use client'
 
-];
+import { useState } from 'react';
+import machineDetails from '../../assets/data/machineDetails.json'
+import Pagination from './Pagination';
 
-export default function Example() {
+interface Machine {
+  date: string
+  orderId: string
+  machineName: string
+  customerName: string
+  contactNumber: number
+  totalAmount: number
+  status: string
+}
+
+export default function Table() {
+
+  const [page,setPage] = useState(1)
+  const [size, setSize] = useState(10);
+
+  const totalItems = machineDetails.length;
+  const totalPages = Math.ceil(totalItems / size);
+  const startIndex = (page - 1) * size;
+  const endIndex = Math.min(startIndex + size - 1, totalItems - 1);
+  const displayedItems = machineDetails.slice(startIndex, endIndex + 1);
+
   return (
     <div className="rounded px-4 sm:px-6 lg:px-8 bg-white ">
       <div className="mt-8 flow-root">
@@ -24,70 +37,102 @@ export default function Example() {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
-                    Name
+                    S.NO.
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Title
+                    DATE
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Status
+                    ORDER ID
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Role
+                    MACHINE NAME
                   </th>
-                 
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    CUSTOMER NAME
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    CONTACT NUMBER
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    TOTAL AMOUNT
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    STATUS
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {people.map((person) => (
-                  <tr key={person.email}>
-                    <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                      <div className="flex items-center">
-                        <div className="h-11 w-11 flex-shrink-0">
-                          <img
-                            className="h-11 w-11 rounded-full"
-                            src={person.image}
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-4">
-                          <div className="font-medium text-gray-900">
-                            {person.name}
-                          </div>
-                          <div className="mt-1 text-gray-500">
-                            {person.email}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
+                {displayedItems.map((machine: Machine, index: number) => (
+                  <tr key={machine.orderId}>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      <div className="text-gray-900">{person.title}</div>
-                      <div className="mt-1 text-gray-500">
-                        {person.department}
-                      </div>
+                      {index + 1}
                     </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <div className="text-gray-900">{machine.date}</div>
+                      <div className="mt-1 text-gray-500">time</div>
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      {machine.orderId}
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <div className="text-gray-900">{machine.machineName}</div>
+                      <div className="mt-1 text-gray-500">time</div>
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      {machine.customerName}
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      {machine.contactNumber}
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      {machine.totalAmount}
+                    </td>
+
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        Active
+                        {machine.status}
                       </span>
                     </td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      {person.role}
-                    </td>
-                    
                   </tr>
                 ))}
               </tbody>
             </table>
+            <Pagination
+              page={page}
+              size={size}
+              setPage={setPage}
+              setSize={setSize}
+              totalPages={totalPages}
+              totalItems={totalItems}
+            />
           </div>
         </div>
       </div>
