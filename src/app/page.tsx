@@ -48,11 +48,11 @@ export default function Home() {
       </div>
 
       <div className="flex space-x-8 justify-between">
-        <div className="w-2/3">
+        <div className="w-4/6">
           <EnhancedTable />
         </div>
 
-        <div className="rounded-lg w-1/3 bg-white">
+        <div className="rounded-lg w-2/6 bg-white">
           <button
             className="bg-gray-900"
             onClick={() => setIsModalOpen(true)}

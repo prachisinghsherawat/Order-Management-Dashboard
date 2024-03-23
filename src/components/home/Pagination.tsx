@@ -27,10 +27,10 @@ export default function Pagination(props: Props) {
   };
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="flex items-center justify-between rounded-md bg-white px-4 py-3 sm:px-6">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
    
-        <p className="text-sm text-gray-700">
+        <p className="text-xs text-gray-700">
           Showing{" "}
           <span className="font-medium">
             {Math.min((page - 1) * size + 1, totalItems)}
@@ -43,7 +43,7 @@ export default function Pagination(props: Props) {
         </p>
      
         <div className="flex gap-x-3 items-center">
-          <label htmlFor="rowsPerPage" className="text-sm text-gray-800">
+          <label htmlFor="rowsPerPage" className="text-xs text-gray-800">
             Rows per page
           </label>
           <select
@@ -51,7 +51,7 @@ export default function Pagination(props: Props) {
             name="rowsPerPage"
             value={size}
             onChange={handleSizeChange}
-            className="text-sm h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:outline-none"
+            className="text-xs h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:outline-none"
           >
             <option value={10}>10</option>
             <option value={20}>20</option>
@@ -67,7 +67,7 @@ export default function Pagination(props: Props) {
             <button
               onClick={handlePrevPage}
               disabled={page === 1}
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -79,9 +79,9 @@ export default function Pagination(props: Props) {
                 onClick={() => setPage(num + 1)}
                 className={`relative ${
                   page === num + 1
-                    ? "z-10 bg-indigo-600 text-white"
-                    : "text-gray-900 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                } inline-flex items-center px-4 py-2 text-sm font-semibold border ring-1 ring-inset ring-gray-300`}
+                    ? "z-10 bg-blue-500 text-white rounded-md"
+                    : "text-gray-400 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                } inline-flex items-center px-4 py-1 text-xs font-semibold`}
               >
                 {num + 1}
               </button>
@@ -89,7 +89,7 @@ export default function Pagination(props: Props) {
             <button
               onClick={handleNextPage}
               disabled={page === totalPages}
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
@@ -103,14 +103,14 @@ export default function Pagination(props: Props) {
         <button
           onClick={handlePrevPage}
           disabled={page === 1}
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </button>
         <button
           onClick={handleNextPage}
           disabled={page === totalPages}
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50"
         >
           Next
         </button>

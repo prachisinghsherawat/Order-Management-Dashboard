@@ -35,7 +35,7 @@ function classNames(...classes:any) {
 
 export default function Navbar({children} : any) {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-full bg-gray-50">
       {/* Sidebar */}
       <div className="flex flex-col w-20 bg-white shadow-sm px-2 py-4">
         <img
