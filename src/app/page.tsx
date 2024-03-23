@@ -1,15 +1,17 @@
 "use client"
 
-import Navbar from "@/components/Navbar";
 import EnhancedTable from "@/components/home/Table";
 import { DocumentTextIcon, MagnifyingGlassIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import FilterModal from '@/components/FilterModal';
+import FilterModal from "@/components/home/FilterModal";
+import Filters from "@/components/home/Filters";
+import TextInput from "@/components/base/TextInput";
 
 
 export default function Home() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchMachines, setSearchMachines] = useState('')
 
   return (
     <>
@@ -18,21 +20,12 @@ export default function Home() {
           <label htmlFor="search" className="sr-only">
             Search
           </label>
-          <div className="relative">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <MagnifyingGlassIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </div>
-            <input
-              id="search"
-              name="search"
-              className="block w-full rounded-md border-0 bg-white py-2 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-xs sm:leading-6"
-              placeholder="Search"
-              type="search"
-            />
-          </div>
+          <TextInput
+            onChange={(e: any) => setSearchMachines(e.target.value)}
+            placeholder="Search by machine names"
+            name="search"
+            id="search"
+          />
         </div>
 
         <div className="flex space-x-4 items-center">
@@ -48,18 +41,14 @@ export default function Home() {
       </div>
 
       <div className="flex space-x-8 justify-between">
+        {/* left part- table */}
         <div className="w-4/6">
-          <EnhancedTable />
+          <EnhancedTable searchMachines={searchMachines} />
         </div>
 
-        <div className="rounded-lg w-2/6 bg-white">
-          <button
-            className="bg-gray-900"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Open
-          </button>
-
+        {/* right part- filters  */}
+        <div className="w-2/6">
+          <Filters open={isModalOpen} setOpen={setIsModalOpen} />
           <FilterModal open={isModalOpen} setOpen={setIsModalOpen} />
         </div>
       </div>
