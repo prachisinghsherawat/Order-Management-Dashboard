@@ -1,6 +1,4 @@
-// 'use client'
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import machineDetails from '../../assets/data/machineDetails.json'
 import Pagination from './Pagination';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
@@ -13,18 +11,39 @@ interface Machine {
   contactNumber: number
   totalAmount: number
   status: string
+  machineAddress: string
 }
 
-export default function Table() {
-
-  const [page,setPage] = useState(1)
+export default function Table({ searchMachines }:any) {
+  const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const [displayedItems, setDisplayItems] = useState(machineDetails);
 
   const totalItems = machineDetails.length;
   const totalPages = Math.ceil(totalItems / size);
-  const startIndex = (page - 1) * size;
-  const endIndex = Math.min(startIndex + size - 1, totalItems - 1);
-  const displayedItems = machineDetails.slice(startIndex, endIndex + 1);
+
+  useEffect(() => {
+    if (searchMachines) {
+      let filteredItems = displayedItems.filter(
+        (items: any) => items.machineName.toLowerCase().includes(searchMachines.toLowerCase())
+      );
+      setDisplayItems(filteredItems);
+    } else {
+      const startIndex = (page - 1) * size;
+      const endIndex = Math.min(startIndex + size - 1, totalItems - 1);
+      const updatedItems = machineDetails.slice(startIndex, endIndex + 1);
+      setDisplayItems(updatedItems);
+    }
+  }, [searchMachines, page, size]);
+
+  const handleSorting = (field:any) => {
+
+    if(field==="date"){
+      const sortByDate = displayedItems.sort()
+      console.log(sortByDate)
+    }
+
+  }
 
   return (
     <>
@@ -47,7 +66,10 @@ export default function Table() {
                     >
                       <div className="flex justify-between w-full">
                         DATE
-                        <ChevronUpDownIcon className="h-4 w-4" />
+                        <ChevronUpDownIcon
+                          onClick={() => handleSorting("date")}
+                          className="h-4 w-4 cursor-pointer"
+                        />
                       </div>
                     </th>
                     <th
@@ -56,7 +78,10 @@ export default function Table() {
                     >
                       <div className="flex justify-between w-full">
                         ORDER ID
-                        <ChevronUpDownIcon className="h-4 w-4" />
+                        <ChevronUpDownIcon
+                          onClick={() => handleSorting("orderId")}
+                          className="h-4 w-4"
+                        />
                       </div>
                     </th>
 
@@ -84,7 +109,10 @@ export default function Table() {
                     >
                       <div className="flex justify-between w-full">
                         TOTAL AMOUNT
-                        <ChevronUpDownIcon className="h-4 w-4" />
+                        <ChevronUpDownIcon
+                          onClick={() => handleSorting("totalAmount")}
+                          className="h-4 w-4"
+                        />
                       </div>
                     </th>
 
