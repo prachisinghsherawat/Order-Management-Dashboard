@@ -4,7 +4,7 @@ import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Squares2X2Icon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import Button from "./Button";
+import Button from "./base/Button";
 
 interface Props {
   open: boolean;

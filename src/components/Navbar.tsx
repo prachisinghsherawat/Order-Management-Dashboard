@@ -12,12 +12,10 @@ import {
   MapIcon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import basilLogo from "../assets/images/basil_logo.png";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import TextInput from "./TextInput";
+import TextInput from "./base/TextInput";
 
 const navigation = [
   { id: 0, href: "#", icon: HomeIcon, current: false },
