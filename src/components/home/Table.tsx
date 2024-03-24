@@ -1,7 +1,10 @@
+'use '
+
 import { useEffect, useState } from 'react';
 import machineDetails from '../../assets/data/machineDetails.json'
 import Pagination from './Pagination';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/navigation';
 
 interface Machine {
   date: string
@@ -17,6 +20,7 @@ interface Machine {
 export default function Table({ searchMachines }:any) {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const router = useRouter()
   const [displayedItems, setDisplayItems] = useState(machineDetails);
 
   const totalItems = machineDetails.length;
@@ -126,7 +130,7 @@ export default function Table({ searchMachines }:any) {
                 </thead>
                 <tbody className="bg-white">
                   {displayedItems.map((machine: Machine, index: number) => (
-                    <tr key={machine.orderId} className="align-top">
+                    <tr onClick={() => router.push(`/${machine.orderId}`)} key={machine.orderId} className="align-top cursor-pointer">
                       <td className="whitespace-nowrap px-3 py-5 text-xs text-gray-500">
                         {index + 1}.
                       </td>

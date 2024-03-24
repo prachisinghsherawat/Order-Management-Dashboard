@@ -1,12 +1,13 @@
 'use client'
 
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowPathIcon, ArrowTrendingUpIcon, CheckCircleIcon, NoSymbolIcon, Squares2X2Icon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Button from "../base/Button";
 import Machines from "./Machines";
 import DateRangePicker from "./DateRangePicker";
+import useFilterStore from "@/zustand/FilterValue";
 
 interface Props {
   open: boolean;
@@ -30,6 +31,9 @@ const statuses = [
 
 export default function FilterModal({ open, setOpen }: Props) {
   const cancelButtonRef = useRef(null);
+
+  const [selectedStatus , setSelectedStatus] = useState<any>([])
+  const { setFilterValue } = useFilterStore();
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -105,7 +109,15 @@ export default function FilterModal({ open, setOpen }: Props) {
                   <h1 className="text-gray-900 text-sm">Status</h1>
                   <div className="grid grid-cols-5 mt-3 gap-4">
                     {statuses.map((status: Status) => (
-                      <div className="rounded-md py-2 items-center flex flex-col border border-gray-300 hover:border-gray-800">
+                      <div
+                        onClick={() =>
+                          setSelectedStatus([...selectedStatus, status.name])
+                        }
+                        className={`rounded-md py-2 items-center flex flex-col border border-gray-300 ${
+                          selectedStatus.includes(status.name) &&
+                          "border-gray-800"
+                        }`}
+                      >
                         <status.icon
                           className="w-7 h-7 text-gray-700"
                           aria-hidden="true"
@@ -125,10 +137,20 @@ export default function FilterModal({ open, setOpen }: Props) {
                 {/* Buttons */}
 
                 <div className="flex justify-between items-center mt-6">
-                  <Link className='underline text-sm text-gray-900' href=''>Clear All</Link>
-                  <Button>Apply</Button>
+                  <Link className="underline text-sm text-gray-900" href="">
+                    Clear All
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setFilterValue(selectedStatus);
+                      setOpen(false);
+                    }}
+                    type="button"
+                    className="w-28 rounded-md bg-blue-500 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Apply
+                  </button>
                 </div>
-                
               </div>
             </div>
           </Transition.Child>

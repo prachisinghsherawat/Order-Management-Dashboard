@@ -140,7 +140,7 @@ export default function Table(){
                                 : "ring-purple-500 text-purple-500"
                             }`}
                           >
-                            {drink.status}.
+                            {drink.status}
                           </span>
                         </td>
 
