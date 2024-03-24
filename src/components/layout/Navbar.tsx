@@ -9,13 +9,13 @@ import {
   UsersIcon,
   Cog8ToothIcon,
   ArrowRightStartOnRectangleIcon,
-  MapIcon
+  MapIcon,
+  MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import TextInput from "../base/TextInput";
 
 const navigation = [
   { id: 0, href: "#", icon: HomeIcon, current: false },
@@ -34,6 +34,7 @@ function classNames(...classes:any) {
 }
 
 export default function Navbar({children} : any) {
+
   return (
     <div className="flex min-h-full bg-gray-50">
       {/* Sidebar */}
@@ -74,16 +75,49 @@ export default function Navbar({children} : any) {
                 <div className="flex h-20 justify-between">
                   <div className="flex px-2 lg:px-0">
                     <div className="hidden lg:block py-3 pl-3 pr-4">
-                      <h1 className="block border-l-4 border-transparent text-lg font-medium text-gray-600">
-                        All Orders
-                      </h1>
-                      <p className="block border-l-4 border-transparent pt-2 text-sm font-medium text-blue-500 ">
-                        All Orders
-                      </p>
+                      {window.location.pathname === "/" ? (
+                        <>
+                          <h1 className="block border-l-4 border-transparent text-lg font-medium text-gray-600">
+                            All Orders
+                          </h1>
+                          <p className="block border-l-4 border-transparent pt-2 text-sm font-medium text-blue-500">
+                            All Orders
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <h1 className="block border-l-4 border-transparent text-lg font-medium text-gray-600">
+                            {window.location.pathname.replace("/", "")}
+                          </h1>
+                          <p className="block border-l-4 border-transparent pt-2 text-sm font-medium text-blue-500">
+                            All Orders / {window.location.pathname.replace("/", "")}
+                          </p>
+                        </>
+                      )}
                     </div>
                   </div>
+
                   <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                    <TextInput id="search" name="search" />
+                    <div className="w-full max-w-lg lg:max-w-xs">
+                      <label htmlFor="search" className="sr-only">
+                        Search
+                      </label>
+                      <div className="relative">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <MagnifyingGlassIcon
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <input
+                          id="search"
+                          name="search"
+                          className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          placeholder="Search"
+                          type="search"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="flex items-center lg:hidden">
                     {/* Mobile menu button */}
